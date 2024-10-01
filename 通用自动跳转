@@ -1,0 +1,17 @@
+// ==UserScript==
+// @name         通用自动跳转
+// @namespace    http://tampermonkey.net/
+// @version      1.0
+// @description  Redirects to a target URL parameter if it's a valid website.
+// @match        *://*/*
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const target = urlParams.get('target');
+
+    if (target && /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/.test(target)) {
+        window.location.href = target;
+    }
+})();
